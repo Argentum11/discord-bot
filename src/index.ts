@@ -22,10 +22,17 @@ client.login(botToken);
 
 client.once(Events.ClientReady, () => {
   console.log(`Bot logged in as ${client.user?.tag}`);
-});
 
-client.on(Events.MessageCreate, (message: Message) => {
-  if (message.channel instanceof TextChannel) {
-    console.log(`${message.author.displayName}: ${message.content}`);
-  }
+  const botName = client.user?.username;
+
+  client.on(Events.MessageCreate, (message: Message) => {
+    if (message.channel instanceof TextChannel) {
+      if (!message.author.bot && message.content === "hi bot") {
+        message.reply(
+          `Hi, I am ${botName}, a bot that plays rock-paper-scissors with you.`
+        );
+      }
+      console.log(`${message.author.username}: ${message.content}`);
+    }
+  });
 });
