@@ -5,6 +5,8 @@ import {
   Message,
   Events,
   TextChannel,
+  DMChannel,
+  Partials,
 } from "discord.js";
 
 config();
@@ -15,7 +17,9 @@ const client = new Client({
     GatewayIntentBits.Guilds, // discord server related events, such as create/delete a channel/thread
     GatewayIntentBits.GuildMessages, // message related events, such as message create/update, but not the message content
     GatewayIntentBits.MessageContent,
+    GatewayIntentBits.DirectMessages,
   ],
+  partials: [Partials.Channel],
 });
 
 client.login(botToken);
@@ -26,7 +30,7 @@ client.once(Events.ClientReady, () => {
   const botName = client.user?.username;
 
   client.on(Events.MessageCreate, (message: Message) => {
-    if (message.channel instanceof TextChannel) {
+    if (message.channel instanceof DMChannel) {
       if (!message.author.bot && message.content === "hi bot") {
         message.reply(
           `Hi, I am ${botName}, a bot that plays rock-paper-scissors with you.`

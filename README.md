@@ -33,6 +33,12 @@ A Discord bot written in Typescript
     npm start
     ```
 
+## Fundamental Concepts
+
+### Partials
+
+Partials in Discord.js represent pieces of data that may be incomplete or "partial" when received from Discord's API. They are used to handle situations where Discord doesn't send complete objects in certain events to save bandwidth and improve performance.
+
 ## References
 
 [Intent description](https://ithelp.ithome.com.tw/articles/10318888)
