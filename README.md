@@ -39,6 +39,13 @@ A Discord bot written in Typescript
 
 Partials in Discord.js represent pieces of data that may be incomplete or "partial" when received from Discord's API. They are used to handle situations where Discord doesn't send complete objects in certain events to save bandwidth and improve performance.
 
+## use case
+
+- Receiving events for uncached messages (e.g., reactions on old messages)
+- Handling DM (Direct Message) events
+- Working with threads or thread members that aren't fully cached
+- Dealing with guild members or users that aren't fully cached
+
 ## References
 
 [Intent description](https://ithelp.ithome.com.tw/articles/10318888)
