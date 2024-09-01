@@ -35,6 +35,23 @@ A Discord bot written in Typescript
 
 ## Fundamental Concepts
 
+## Intents
+
+Intents refer to a way of specifying which events your bot is interested in receiving from Discord
+
+### Types
+
+- General Intents
+  - Available to all bots
+  - ```Guilds```
+    - Allows the bot to receive events related to guilds (servers).
+- Privileged Intents
+  - require explicit approval from Discord
+  - ```GuildMembers```
+    - allows your bot to receive events related to server members, like joining or leaving.
+  - ```MessageContent```
+    - allows your bot to receive the full content of a message
+
 ### Partials
 
 Partials in Discord.js represent pieces of data that may be incomplete or "partial" when received from Discord's API. They are used to handle situations where Discord doesn't send complete objects in certain events to save bandwidth and improve performance.
