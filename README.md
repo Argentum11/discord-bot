@@ -35,11 +35,11 @@ A Discord bot written in Typescript
 
 ## Fundamental Concepts
 
-## Intents
+### Intents
 
 Intents refer to a way of specifying which events your bot is interested in receiving from Discord
 
-### Types
+#### Types
 
 - General Intents
   - Available to all bots
@@ -56,7 +56,7 @@ Intents refer to a way of specifying which events your bot is interested in rece
 
 Partials in Discord.js represent pieces of data that may be incomplete or "partial" when received from Discord's API. They are used to handle situations where Discord doesn't send complete objects in certain events to save bandwidth and improve performance.
 
-## use case
+#### use case
 
 - Receiving events for uncached messages (e.g., reactions on old messages)
 - Handling DM (Direct Message) events
