@@ -9,7 +9,10 @@ import {
   Partials,
 } from "discord.js";
 
-config();
+if (process.env.NODE_ENV !== "production") {
+  config();
+}
+
 const botToken = process.env.BOT_TOKEN;
 
 const client = new Client({
