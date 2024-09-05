@@ -7,7 +7,7 @@ import {
   DMChannel,
   Partials,
 } from "discord.js";
-import { commandHandler, registerCommands } from "./command";
+import { commandHandler, registerCommands, removeAllCommands } from "./command";
 
 if (process.env.NODE_ENV !== "production") {
   config();
@@ -15,6 +15,17 @@ if (process.env.NODE_ENV !== "production") {
 
 const botToken = process.env.BOT_TOKEN;
 const appId = process.env.APP_ID;
+
+async function handleShutdown(signal: string, client: Client) {
+  console.log(`Received ${signal}. Removing commands and shutting down...`);
+  if (botToken && appId) {
+    await removeAllCommands(botToken, appId);
+  } else {
+    console.error("Unable to remove commands: botToken or appId is undefined");
+  }
+  client.destroy();
+  process.exit(0);
+}
 
 async function startBot() {
   if (!botToken) {
@@ -57,6 +68,10 @@ async function startBot() {
     client.on(Events.InteractionCreate, async (interaction) => {
       await commandHandler(interaction);
     });
+
+    // Handle graceful shutdown
+    process.on("SIGINT", () => handleShutdown("SIGINT", client));
+    process.on("SIGTERM", () => handleShutdown("SIGTERM", client));
   });
 }
 

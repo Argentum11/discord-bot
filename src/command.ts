@@ -26,6 +26,20 @@ export async function registerCommands(botToken: string, appId: string) {
   }
 }
 
+export async function removeAllCommands(botToken: string, appId: string) {
+  const rest = new REST({ version: "10" }).setToken(botToken);
+
+  try {
+    console.log("Started removing application (/) commands.");
+
+    await rest.put(Routes.applicationCommands(appId), { body: [] });
+
+    console.log("Successfully removed all application (/) commands.");
+  } catch (error) {
+    console.error("Error removing commands:", error);
+  }
+}
+
 export async function commandHandler(interaction: Interaction) {
   if (!interaction.isChatInputCommand()) return;
 
