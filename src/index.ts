@@ -7,7 +7,12 @@ import {
   DMChannel,
   Partials,
 } from "discord.js";
-import { commandHandler, registerCommands, removeAllCommands } from "./command";
+import {
+  commandHandler,
+  registerCommands,
+  removeAllCommands,
+  buttonHandler,
+} from "./command";
 
 if (process.env.NODE_ENV !== "production") {
   config();
@@ -66,7 +71,11 @@ async function startBot() {
     });
 
     client.on(Events.InteractionCreate, async (interaction) => {
-      await commandHandler(interaction);
+      if (interaction.isChatInputCommand()) {
+        await commandHandler(interaction);
+      } else if (interaction.isButton()) {
+        await buttonHandler(interaction);
+      }
     });
 
     // Handle graceful shutdown
